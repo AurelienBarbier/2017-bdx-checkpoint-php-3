@@ -1,0 +1,2 @@
+# Algorithmique : 45mn
+# Symfony : 3h00
