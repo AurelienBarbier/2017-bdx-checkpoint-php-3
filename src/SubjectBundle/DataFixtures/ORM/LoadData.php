@@ -2,8 +2,8 @@
 
 namespace SubjectBundle\DataFixtures\ORM;
 
-use TvShowManagerBundle\Entity\TvShow;
-use TvShowManagerBundle\Entity\Episode;
+use TV\TvShowManagerBundle\Entity\TvShow;
+use TV\TvShowManagerBundle\Entity\Episode;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 

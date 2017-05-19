@@ -1,0 +1,24 @@
+episode_index:
+    path:     /
+    defaults: { _controller: "TVTvShowManagerBundle:Episode:index" }
+    methods:  GET
+
+episode_show:
+    path:     /{id}/show
+    defaults: { _controller: "TVTvShowManagerBundle:Episode:show" }
+    methods:  GET
+
+episode_new:
+    path:     /new
+    defaults: { _controller: "TVTvShowManagerBundle:Episode:new" }
+    methods:  [GET, POST]
+
+episode_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "TVTvShowManagerBundle:Episode:edit" }
+    methods:  [GET, POST]
+
+episode_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "TVTvShowManagerBundle:Episode:delete" }
+    methods:  DELETE
