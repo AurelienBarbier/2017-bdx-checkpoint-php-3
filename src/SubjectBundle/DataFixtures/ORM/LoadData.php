@@ -485,8 +485,6 @@ class LoadData implements FixtureInterface
         ];
 
 
-
-
         foreach ($tvshows as $title =>$tvshow){
             $show = new TvShow();
             $show->setName($title);
