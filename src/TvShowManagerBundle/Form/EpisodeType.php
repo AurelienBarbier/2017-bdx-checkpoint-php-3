@@ -17,23 +17,29 @@ class EpisodeType extends AbstractType
         $builder
             ->add('name', TextType::class, array(
                 'label' => "Nom",
+                'attr' => array('class' => 'form-control'),
             ))
             ->add('tvShow', EntityType::class, array(
                 'class' => TvShow::class,
                 'choice_label' => 'name',
+                'attr' => array('class' => 'form-control'),
             ))
             ->add('season', IntegerType::class, array(
                 'label' => "Saison",
+                'attr' => array('class' => 'form-control'),
             ))
             ->add('number', IntegerType::class, array(
                 'label' => "Numéro",
+                'attr' => array('class' => 'form-control'),
             ))
             ->add('note', IntegerType::class, array(
                 'label' => "Note",
                 'scale' => 0,
+                'attr' => array('class' => 'form-control'),
             ))
             ->add('submit', SubmitType::class, array(
                 'label' => "Valider",
+                'attr' => array('class' => 'form-control'),
             ))
         ;
     }

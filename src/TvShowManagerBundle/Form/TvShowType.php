@@ -15,18 +15,23 @@ class TvShowType extends AbstractType
         $builder
             ->add('name', TextType::class, array(
                 'label' => "Nom",
+                'attr' => array('class' => 'form-control'),
             ))
             ->add('type', TextType::class, array(
                 'label' => "Genre",
+                'attr' => array('class' => 'form-control'),
             ))
             ->add('year', IntegerType::class, array(
                 'label' => "Année de création",
+                'attr' => array('class' => 'form-control'),
             ))
             ->add('url', TextType::class, array(
                 'label' => "Url de l'illustration",
+                'attr' => array('class' => 'form-control'),
             ))
             ->add('submit', SubmitType::class, array(
                 'label' => "Valider",
+                'attr' => array('class' => 'form-control'),
             ))
         ;
 
