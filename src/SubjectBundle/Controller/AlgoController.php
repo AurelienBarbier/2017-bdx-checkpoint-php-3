@@ -15,8 +15,7 @@ class AlgoController extends Controller
     {
         $array_keys = array_keys($series);
 
-        sort($array_keys, SORT_NUMERIC);
-        print_r($array_keys);
+        sort($array_keys);
 
         $array_diff = array();
 
