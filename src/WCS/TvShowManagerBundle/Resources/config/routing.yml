@@ -1,0 +1,13 @@
+wcs_tv_show_manager_homepage:
+    path:     /
+    defaults: { _controller: WCSTvShowManagerBundle:Default:index }
+
+
+wcs_episode:
+    resource: "@WCSTvShowManagerBundle/Resources/config/routing/episode.yml"
+    prefix:   /episode
+
+
+wcs_tvshow:
+    resource: "@WCSTvShowManagerBundle/Resources/config/routing/tvshow.yml"
+    prefix:   /tvshow
