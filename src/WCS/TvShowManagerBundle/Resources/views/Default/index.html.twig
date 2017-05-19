@@ -1,11 +1,35 @@
-Hello World!
+{% extends "::base.html.twig" %}
+
 
 {% block body %}
 
-    {% for tvshow in tvshow %}
-
-        {{ tvshow.name }}
-
-        {% endfor %}
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>URL</th>
+        <th>Years</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for tvshow in tvshows %}
+        <tr>
+            <td>
+                {{ tvshow.name }}
+            </td>
+            <td>
+                {{ tvshow.type }}
+            </td>
+            <td>
+                {{ tvshow.url }}
+            </td>
+            <td>
+                {{ tvshow.year }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
 
 {% endblock %}

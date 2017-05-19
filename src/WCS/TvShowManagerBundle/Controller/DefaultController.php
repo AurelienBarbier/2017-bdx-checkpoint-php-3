@@ -14,19 +14,9 @@ class DefaultController extends Controller
     }
 
   public function tvshowAction()
-   {
-       $em = $this->getDoctrine()->getManager();
-
-       $entity = $em->getRepository('TvShowManagerBundle:Tvshow');
-
-       if (!$entity) {
-           throw $this->createNotFoundException('Pas trouvé.');
-       }
-
-       return array(
-           'entity'      => $entity,
-           );
-   }
+  {
+      return $this->render('TvShowManagerBundle:Default:index.html.twig');
+  }
 
       public function newAction()
       {
