@@ -1,0 +1,34 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}WCSTvShowManagerBundle:TvShow:list{% endblock %}
+
+{% block body %}
+    <h1>Liste des TV SHOW</h1>
+
+    <div class="text-right">
+        <a class="btn btn-default" href="{{ path('tvshow_add') }}" role="button">Ajouter une série</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Image</th>
+            <th>Year</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for tvshow in tvshows %}
+                <tr>
+                    <td><a href="{{ path('episode_list', { 'id': tvshow.id }) }}">{{ tvshow.name }}</a></td>
+                    <td>{{ tvshow.type }}</td>
+                    <td><img class="img-responsive" src={{ tvshow.url }}></td>
+                    <td>{{ tvshow.year }}</td>
+                    <td>
+                        <a class="btn btn-danger" href="{{ path('tvshow_delete', { 'id': tvshow.id }) }}" role="button">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

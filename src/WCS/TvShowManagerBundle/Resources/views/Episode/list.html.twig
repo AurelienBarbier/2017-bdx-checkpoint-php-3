@@ -1,0 +1,38 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}WCSTvShowManagerBundle:Episode:list{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-6">
+            <a class="btn btn-default" href="{{ path('tvshow_list') }}" role="button">Retour liste des Tv Show</a>
+        </div>
+        <div class="col-xs-6 text-right">
+            <a class="btn btn-default" href="{{ path('episode_add', { 'id': tvshow.id }) }}" role="button">Ajouter un épisode</a>
+        </div>
+    </div>
+
+<h1>Liste des épisode de la série {{ tvshow.name }}</h1>
+    <table class="table table-striped">
+        <thead>
+        <th>Name</th>
+        <th>Season</th>
+        <th>Number</th>
+        <th>Note</th>
+        <th></th>
+        </thead>
+        <tbody>
+        {% for episode in episodes %}
+            <tr>
+                <td>{{ episode.name }}</td>
+                <td>{{ episode.season }}</td>
+                <td>{{ episode.number }}</td>
+                <td>{{ episode.note }}</td>
+                <td>
+                    <a class="btn btn-danger" href="{{ path('episode_delete', { 'id': episode.id }) }}" role="button">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,47 @@
+wcs_tv_show_manager_homepage:
+    path:     /
+    defaults: { _controller: WCSTvShowManagerBundle:Default:index }
+
+tvshow_list:
+    path:     /tvshow/list
+    defaults: { _controller: WCSTvShowManagerBundle:TvShow:list }
+
+tvshow_modif:
+    path:     /tvshow/modif/{id}
+    defaults: { _controller: WCSTvShowManagerBundle:TvShow:modif }
+    requirements:
+        id: \d+
+
+tvshow_add:
+    path:     /tvshow/add
+    defaults: { _controller: WCSTvShowManagerBundle:TvShow:add }
+
+tvshow_delete:
+    path:     /tvshow/delete/{id}
+    defaults: { _controller: WCSTvShowManagerBundle:TvShow:delete }
+    requirements:
+        id: \d+
+
+episode_list:
+    path:     /episode/list/{id}
+    defaults: { _controller: WCSTvShowManagerBundle:Episode:list }
+    requirements:
+        id: \d+
+
+episode_modif:
+    path:     /episode/modif/{id}
+    defaults: { _controller: WCSTvShowManagerBundle:Episode:modif }
+    requirements:
+        id: \d+
+
+episode_add:
+    path:     /episode/add/{id}
+    defaults: { _controller: WCSTvShowManagerBundle:Episode:add }
+    requirements:
+        id: \d+
+
+episode_delete:
+    path:     /episode/delete/{id}
+    defaults: { _controller: WCSTvShowManagerBundle:Episode:delete }
+    requirements:
+        id: \d+
