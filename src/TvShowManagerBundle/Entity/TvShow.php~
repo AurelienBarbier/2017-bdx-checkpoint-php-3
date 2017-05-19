@@ -38,7 +38,7 @@ class TvShow
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255, unique=true)
+     * @ORM\Column(name="url", type="string", length=255)
      */
     private $url;
 
@@ -49,6 +49,17 @@ class TvShow
      */
     private $year;
 
+    /**
+     * Plusieurs épisodes fait partie d'une seule série.
+     * Une série contient plusieurs épisodes.
+     * @ORM\OneToMany(targetEntity="Episode", mappedBy="tvShow")
+     */
+    private $episodes;
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Get id
@@ -155,5 +166,45 @@ class TvShow
     {
         return $this->year;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->episodes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add episode
+     *
+     * @param \TvShowManagerBundle\Entity\TvShow $episode
+     *
+     * @return TvShow
+     */
+    public function addEpisode(\TvShowManagerBundle\Entity\TvShow $episode)
+    {
+        $this->episodes[] = $episode;
+
+        return $this;
+    }
+
+    /**
+     * Remove episode
+     *
+     * @param \TvShowManagerBundle\Entity\TvShow $episode
+     */
+    public function removeEpisode(\TvShowManagerBundle\Entity\TvShow $episode)
+    {
+        $this->episodes->removeElement($episode);
+    }
+
+    /**
+     * Get episodes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEpisodes()
+    {
+        return $this->episodes;
+    }
+}

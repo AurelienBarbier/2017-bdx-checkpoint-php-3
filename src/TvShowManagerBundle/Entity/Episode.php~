@@ -52,7 +52,7 @@ class Episode
     /**
      * Plusieurs épisodes fait partie d'une seule série.
      * Une série contient plusieurs épisodes.
-     * @ORM\ManyToOne(targetEntity="TvShow")
+     * @ORM\ManyToOne(targetEntity="TvShow", inversedBy="episodes")
      */
     private $tvShow;
 
@@ -161,5 +161,28 @@ class Episode
     {
         return $this->note;
     }
-}
 
+    /**
+     * Set tvShow
+     *
+     * @param TvShow $tvShow
+     *
+     * @return Episode
+     */
+    public function setTvShow(TvShow $tvShow = null)
+    {
+        $this->tvShow = $tvShow;
+
+        return $this;
+    }
+
+    /**
+     * Get tvShow
+     *
+     * @return TvShow
+     */
+    public function getTvShow()
+    {
+        return $this->tvShow;
+    }
+}

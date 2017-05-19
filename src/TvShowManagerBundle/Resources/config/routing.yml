@@ -33,3 +33,7 @@ episode_edit:
 episode_delete:
     path:     /episode/delete/{episodeId}
     defaults: { _controller: TvShowManagerBundle:Episode:delete}
+
+note_list:
+    path:     /note
+    defaults: { _controller: TvShowManagerBundle:TvShow:note}

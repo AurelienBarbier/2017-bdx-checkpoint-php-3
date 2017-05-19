@@ -74,4 +74,26 @@ class TvShowController extends Controller
             'show' => $tvShow,
         ));
     }
+
+    public function noteAction()
+    {
+        $avgNotes=[];
+        $em = $this->getDoctrine()->getManager();
+        $tvShows = $em->getRepository('TvShowManagerBundle:TvShow')
+            ->findAll();
+
+        foreach ($tvShows as $show) {
+            $sumNote = 0;
+            foreach ($show->getEpisodes() as $episode) {
+                $sumNote += $episode->getNote();
+            }
+            $avgNote = $sumNote / count($show->getEpisodes());
+            $avgNotes[$show->getName()] = $avgNote;
+        }
+        arsort($avgNotes);
+
+        return $this->render('@TvShowManager/TvShow/note.html.twig', array(
+            'avgNotes' => $avgNotes,
+        ));
+    }
 }

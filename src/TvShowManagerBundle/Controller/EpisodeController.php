@@ -13,7 +13,7 @@ class EpisodeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $episodes = $em->getRepository('TvShowManagerBundle:Episode')
-            ->findAll();
+            ->findEpisodesWithShow();
 
         return $this->render('@TvShowManager/Episode/list.html.twig', array(
             'episodes' => $episodes,

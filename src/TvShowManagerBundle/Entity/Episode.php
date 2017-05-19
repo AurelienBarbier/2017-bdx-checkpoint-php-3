@@ -52,7 +52,7 @@ class Episode
     /**
      * Plusieurs épisodes fait partie d'une seule série.
      * Une série contient plusieurs épisodes.
-     * @ORM\ManyToOne(targetEntity="TvShow")
+     * @ORM\ManyToOne(targetEntity="TvShow", inversedBy="episodes")
      */
     private $tvShow;
 

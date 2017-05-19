@@ -49,6 +49,13 @@ class TvShow
      */
     private $year;
 
+    /**
+     * Plusieurs épisodes fait partie d'une seule série.
+     * Une série contient plusieurs épisodes.
+     * @ORM\OneToMany(targetEntity="Episode", mappedBy="tvShow")
+     */
+    private $episodes;
+
     public function __toString()
     {
         return $this->name;
@@ -158,5 +165,46 @@ class TvShow
     public function getYear()
     {
         return $this->year;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->episodes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add episode
+     *
+     * @param \TvShowManagerBundle\Entity\Episode $episode
+     *
+     * @return TvShow
+     */
+    public function addEpisode(\TvShowManagerBundle\Entity\Episode $episode)
+    {
+        $this->episodes[] = $episode;
+
+        return $this;
+    }
+
+    /**
+     * Remove episode
+     *
+     * @param \TvShowManagerBundle\Entity\Episode $episode
+     */
+    public function removeEpisode(\TvShowManagerBundle\Entity\Episode $episode)
+    {
+        $this->episodes->removeElement($episode);
+    }
+
+    /**
+     * Get episodes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEpisodes()
+    {
+        return $this->episodes;
     }
 }

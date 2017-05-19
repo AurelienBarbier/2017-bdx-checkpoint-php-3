@@ -1,0 +1,25 @@
+{% extends '@TvShowManager/layout.html.twig' %}
+
+{% block content %}
+
+    <h1>Classement des séries par note :</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Note moyenne</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for show in avgNotes|keys %}
+            <tr>
+                <td>{{ show }}</td>
+                <td>{{ avgNotes[show] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <p><a href="{{ path('tv_shows_list') }}">Retour à la liste</a></p>
+{% endblock %}

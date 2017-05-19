@@ -10,4 +10,13 @@ namespace TvShowManagerBundle\Repository;
  */
 class EpisodeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findEpisodesWithShow() {
+        $qb = $this->createQueryBuilder('e');
+
+        $qb
+            ->join('e.tvShow', 's')
+            ->addSelect('s');
+
+        return $qb->getQuery()->getResult();
+    }
 }
