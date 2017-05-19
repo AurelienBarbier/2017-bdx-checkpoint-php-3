@@ -1,3 +1,7 @@
+checkpoint_tv_show_manager:
+    resource: "@CheckpointTvShowManagerBundle/Resources/config/routing.yml"
+    prefix:   /
+
 subject:
     resource: "@SubjectBundle/Controller/"
     type:     annotation

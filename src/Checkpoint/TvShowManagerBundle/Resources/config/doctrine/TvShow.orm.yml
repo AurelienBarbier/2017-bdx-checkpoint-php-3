@@ -1,0 +1,24 @@
+Checkpoint\TvShowManagerBundle\Entity\TvShow:
+    type: entity
+    table: null
+    repositoryClass: Checkpoint\TvShowManagerBundle\Repository\TvShowRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        type:
+            type: string
+            length: 255
+        url:
+            type: string
+            length: 255
+        year:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

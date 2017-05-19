@@ -1,0 +1,3 @@
+checkpoint_tv_show_manager_homepage:
+    path:     /
+    defaults: { _controller: CheckpointTvShowManagerBundle:Default:index }
