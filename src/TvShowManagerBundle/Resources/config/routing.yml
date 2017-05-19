@@ -1,3 +1,35 @@
 tv_show_manager_homepage:
     path:     /
     defaults: { _controller: TvShowManagerBundle:Default:index }
+
+tv_shows_list:
+    path:     /tvshow
+    defaults: { _controller: TvShowManagerBundle:TvShow:list}
+
+tv_shows_add:
+    path:     /tvshow/add
+    defaults: { _controller: TvShowManagerBundle:TvShow:add}
+
+tv_shows_edit:
+    path:     /tvshow/edit/{tvShowName}
+    defaults: { _controller: TvShowManagerBundle:TvShow:edit}
+
+tv_shows_delete:
+    path:     /tvshow/delete/{tvShowName}
+    defaults: { _controller: TvShowManagerBundle:TvShow:delete}
+
+episodes_list:
+    path:     /episode
+    defaults: { _controller: TvShowManagerBundle:Episode:list}
+
+episode_add:
+    path:     /episode/add
+    defaults: { _controller: TvShowManagerBundle:Episode:add}
+
+episode_edit:
+    path:     /episode/edit/{episodeId}
+    defaults: { _controller: TvShowManagerBundle:Episode:edit}
+
+episode_delete:
+    path:     /episode/delete/{episodeId}
+    defaults: { _controller: TvShowManagerBundle:Episode:delete}

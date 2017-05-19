@@ -49,6 +49,10 @@ class TvShow
      */
     private $year;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Get id

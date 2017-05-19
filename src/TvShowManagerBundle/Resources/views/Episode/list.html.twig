@@ -1,0 +1,36 @@
+{% extends '@TvShowManager/layout.html.twig' %}
+
+{% block content %}
+
+    <h1>Liste des Episodes :</h1>
+    <p><a href="{{ path('episode_add') }}">Ajouter un épisode</a></p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Série</th>
+                <th>Saison</th>
+                <th>Numéro</th>
+                <th>Note</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for episode in episodes %}
+            <tr>
+                <td>{{ episode.name }}</td>
+                <td>{{ episode.tvShow }}</td>
+                <td>{{ episode.season }}</td>
+                <td>{{ episode.number }}</td>
+                <td>{{ episode.note }}</td>
+                <td>
+                    <a href="{{ path('episode_edit', {'episodeId': episode.id}) }}">Modifier</a>
+                    <span> / </span>
+                    <a href="{{ path('episode_delete', {'episodeId': episode.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

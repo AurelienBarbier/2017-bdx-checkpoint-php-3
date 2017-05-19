@@ -1,0 +1,10 @@
+{% extends '@TvShowManager/layout.html.twig' %}
+
+{% block content %}
+
+    <h1>Modifier un épisode :</h1>
+
+    {{ form(editForm) }}
+
+    <p><a href="{{ path('episodes_list') }}">Retour à la liste</a></p>
+{% endblock %}
