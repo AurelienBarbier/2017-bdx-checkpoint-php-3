@@ -1,0 +1,5 @@
+algo 1h
+bundle + entite 2h
+fixture 15mn
+crud reste
+
