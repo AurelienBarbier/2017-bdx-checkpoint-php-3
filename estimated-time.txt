@@ -1,3 +1,3 @@
-Algo: 40% du temps
-Symfony:40%
-Ajustement: 20%
+Algo: 40% du temps (1h30 pour travailler sur l'algo)
+Symfony:40% (30 minutes pour les étapes 1 et 2. 1h étape 3)
+Ajustement: 20% (pour m'ajuster si j'ai un soucis sur un point afin d'y consacrer plus de temps)
