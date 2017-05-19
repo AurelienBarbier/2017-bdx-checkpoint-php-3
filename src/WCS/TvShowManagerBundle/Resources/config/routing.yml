@@ -1,0 +1,12 @@
+tv_show_manager_homepage:
+    path:     /tvshow
+    defaults: { _controller: TvShowManagerBundle:Default:index }
+
+tv_show_manager_edit:
+    path:     /edit
+    defaults: { _controller: TvShowManagerBundle:Default:edit }
+
+tv_show_manager_new:
+    path:     /new
+    defaults: { _controller: TvShowManagerBundle:Default:new}
+
