@@ -1,0 +1,3 @@
+Algo: 40% du temps
+Symfony:40%
+Ajustement: 20%
