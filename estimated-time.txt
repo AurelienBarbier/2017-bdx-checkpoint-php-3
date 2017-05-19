@@ -1,2 +1,7 @@
-# Algorithmique : 45mn
-# Symfony : 3h00
+# Algorithmique : 30mn
+
+# Symfony :
+    - etape 1 : 30mn
+    - etape 2 : -
+    - etape 3 : 1h30
+    - etape 4 : 30mn
