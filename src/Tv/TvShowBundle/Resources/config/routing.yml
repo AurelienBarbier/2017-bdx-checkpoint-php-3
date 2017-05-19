@@ -1,0 +1,11 @@
+tv_tv_show_homepage:
+    path:     /
+    defaults: { _controller: TvTvShowBundle:Default:index }
+
+tv_tv_show_tvshow:
+    resource: "@TvTvShowBundle/Resources/config/routing/tvshow.yml"
+    prefix:   /tvshow
+
+tv_tv_show_episode:
+    resource: "@TvTvShowBundle/Resources/config/routing/episode.yml"
+    prefix:   /episode
