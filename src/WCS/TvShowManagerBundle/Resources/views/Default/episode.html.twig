@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+
+{% block navbarbtn %}
+    <li><a class="modal-trigger waves-effect waves-light btn" href="#modal1">Add Episode</a></li>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+{% for episode in episodes %}
+    <div class="col s12 m6">
+        <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+                <a href="#" class="white-text"><span class="card-title">{{ episode.name }}</a>
+                    <div class="right"> Episode {{ episode.number }}</div></span>
+                <p>Resumé ici</p>
+            </div>
+            <div class="card-action">
+                <div class="left white-text">Season {{ episode.season }}</div>
+                <div class="right"><a href="#">Watch</a></div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}
+    </div>
+
+    <div id="modal1" class="modal">
+        {{ form_start(form) }}
+        <div class="modal-content">
+            <h4>Add a Episode</h4>
+            <div>
+                {# render the task's only field: description #}
+                {{ form_row(form.name) }}
+                {{ form_row(form.season) }}
+                {{ form_row(form.number) }}
+
+
+            </div>
+        </div>
+        <div class="modal-footer">
+
+            {{ form_row(form.save, { 'attr': {'class': 'modal-action waves-effect waves-green btn-flat'} }) }}
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+{% block javascripts  %}
+    <script>
+
+        $(document).ready(function(){
+            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+            $('.modal').modal();
+        });
+    </script>
+{% endblock %}

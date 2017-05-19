@@ -1,0 +1,16 @@
+body{
+    background-color: #2a2a2a;
+}
+nav{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.inputepisode{
+    border: solid #d1d1d1 1px;
+    margin-bottom: 5px;
+    padding : 10px;
+}
+.imgcard{
+    height: 150px;
+    overflow: hidden;
+}

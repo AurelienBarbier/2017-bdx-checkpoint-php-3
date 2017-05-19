@@ -4,16 +4,32 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         {% endblock %}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}
-            <script src="{{ asset('js/jquery.js') }}"></script>
-            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-        {% endblock %}
+
+    <div class="navbar-fixed">
+        <nav class="grey">
+            <div class="nav-wrapper">
+                <a href="{{ path('wcs_tv_show_manager_tvshow') }}" class="brand-logo">Netflix 2</a>
+                <ul class="right hide-on-med-and-down">
+                    {% block navbarbtn %}{% endblock %}
+                    <li><a href="{{ path('wcs_tv_show_manager_notes') }}">Notes</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    {% block body %}{% endblock %}
+
+        <script src="{{ asset('js/jquery.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+
+    {% block javascripts %}
+    {% endblock %}
     </body>
 </html>

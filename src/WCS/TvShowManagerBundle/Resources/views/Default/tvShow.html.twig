@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+
+{% block navbarbtn %}
+    <li><a class="modal-trigger waves-effect waves-light btn" href="#modal1">Add TV Show</a></li>
+{% endblock %}
+{% block body %}
+    <div class="row">
+{% for tvShow in tvShows %}
+        <div class="col s12 m4 cardcol">
+
+            <div class="card hoverable">
+                <div class="card-image">
+                    <div class="imgcard">
+                        <a href="{{ path('wcs_tv_show_manager_episode', {id : tvShow.id}) }}">
+                            <img src="{{ tvShow.url }}">
+                        </a>
+                    </div>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red deletebtn" href="#" data-target="{{ tvShow.id }}" onclick="deletetv(this, event);"><i class="material-icons">delete</i></a>
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4"><a href="{{ path('wcs_tv_show_manager_episode', {id : tvShow.id}) }}">{{ tvShow.name }}</a><i class="material-icons right">more_vert</i></span>
+                    <p>Small text about the series here !</p>
+
+                </div>
+
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">{{ tvShow.name }}<i class="material-icons right">close</i></span>
+                    <p>Résumé ici</p>
+                </div>
+
+                <div class="card-action">
+                    <div class="left">Date : {{ tvShow.year }}</div><div class="right">Genre : {{ tvShow.type }}</div>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+{% endfor %}
+    </div>
+    <div id="modal1" class="modal">
+        {{ form_start(form) }}
+        <div class="modal-content">
+            <h4>Add a TV Show</h4>
+            <div>
+                {# render the task's only field: description #}
+                {{ form_row(form.name) }}
+                {{ form_row(form.type) }}
+                {{ form_row(form.url) }}
+                {{ form_row(form.year) }}
+
+                <ul class="episodes" data-prototype="{{ form_widget(form.episodes.vars.prototype)|e('html_attr') }}">
+
+                </ul>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+
+            {{ form_row(form.save, { 'attr': {'class': 'modal-action waves-effect waves-green btn-flat'} }) }}
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        $(document).ready(function(){
+            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+            $('.modal').modal();
+        });
+    </script>
+
+    <script>
+        var $collectionHolder;
+
+        // setup an "add a tag" link
+        var $addTagLink = $('<a href="#" class="add_tag_link">Add a Episode</a>');
+        var $newLinkLi = $('<li></li>').append($addTagLink);
+
+        // Get the ul that holds the collection of tags
+        $collectionHolder = $('ul.episodes');
+
+        // add the "add a tag" anchor and li to the tags ul
+        $collectionHolder.append($newLinkLi);
+
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+        $addTagLink.on('click', function(e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // add a new tag form (see next code block)
+            addTagForm($collectionHolder, $newLinkLi);
+        });
+        function addTagForm($collectionHolder, $newLinkLi) {
+            // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+
+            // get the new index
+            var index = $collectionHolder.data('index');
+
+            // Replace '__name__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            var newForm = prototype.replace(/__name__/g, index);
+
+            // increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li class="inputepisode"></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+    </script>
+    <script>
+        console.log('test');
+        function deletetv(e, event){
+            var id = $(e).data("target");
+            event.preventDefault();
+            $.get( "{{ app.request.scheme ~'://' ~ app.request.httpHost ~ path('wcs_tv_show_manager_deletetv')}}/" + id, function( data ) {
+                $(e).parents(".col").remove();
+                alert('Deleted !');
+            });
+        }
+    </script>
+{% endblock %}
