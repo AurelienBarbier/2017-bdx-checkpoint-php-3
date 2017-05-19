@@ -25,7 +25,7 @@ class AlgoController extends Controller
             if ($array_keys[$i + 1]) {
                 $diff = abs(abs($array_keys[$i]) - abs($array_keys[$i + 1]));
 
-                array_push($a_diff, $diff);
+                array_push($array_diff, $diff);
 
             }
         }
