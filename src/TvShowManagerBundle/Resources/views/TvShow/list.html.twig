@@ -2,8 +2,7 @@
 
 {% block content %}
 
-    <h1>Liste des TvShows :</h1>
-    <p><a href="{{ path('tv_shows_add') }}">Ajouter un tvShow</a></p>
+    <h2>Liste des séries :</h2>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -17,11 +16,15 @@
         <tbody>
             {% for show in tvShows %}
             <tr>
-                <td><a href="{{ path('tv_shows_edit', {'tvShowName':show.name}) }}">{{ show.name }}</a></td>
+                <td>{{ show.name }}</td>
                 <td>{{ show.type }}</td>
                 <td>{{ show.year }}</td>
                 <td><img src="{{ show.url }}" alt="{{ show.name }}" class="illustration"></td>
-                <td><a href="{{ path('tv_shows_delete', {'tvShowName':show.name}) }}">Supprimer</a></td>
+                <td>
+                    <a href="{{ path('tv_shows_edit', {'tvShowName':show.name}) }}">Modifier</a>
+                    <span> / </span>
+                    <a href="{{ path('tv_shows_delete', {'tvShowName':show.name}) }}">Supprimer</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
