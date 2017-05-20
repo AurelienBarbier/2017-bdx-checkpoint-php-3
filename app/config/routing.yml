@@ -5,5 +5,5 @@ wcs_tv_show_manager:
 subject:
     resource: "@SubjectBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /subject
 

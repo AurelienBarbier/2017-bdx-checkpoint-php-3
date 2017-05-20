@@ -15,14 +15,14 @@ class AlgoController extends Controller
         ksort($series);
         $maxInterval = 0;
 
-        $arrayKey = array_keys($series);
-        var_dump($arrayKey);
+        $arrayDates = array_keys($series);
 
-        for($i=0;$i<count($arrayKey);$i++){
-            $date1 = $arrayKey[$i];
-            if ($i+1<count($arrayKey)){
-                $date2 = $arrayKey[$i+1];
-                $interval = $date2 - $date1;
+        for($i=0;$i<count($arrayDates);$i++){
+            $currentDate = $arrayDates[$i];
+            $nextIteration = $i + 1;
+            if ($nextIteration<count($arrayDates)){
+                $nextDate = $arrayDates[$nextIteration];
+                $interval = $nextDate - $currentDate;
                 if ($interval>$maxInterval){
                     $maxInterval = $interval;
                 }
