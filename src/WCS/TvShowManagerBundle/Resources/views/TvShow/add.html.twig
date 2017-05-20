@@ -1,10 +1,41 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}WCSTvShowManagerBundle:TvShow:add{% endblock %}
+{% block title %}{{ parent() }} - Ajouter une série{% endblock %}
 
 {% block body %}
     <h1>Ajouter une nouvelle série</h1>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-    {{ form_end(form) }}
+    {% block form_add_TvShow %}
+        {{ form_start(form, {'attr' : {'novalidate' : 'novalidate'}}) }}
+            <div class="col-xs-6">
+                <div class="form-group">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name, {'attr' : { 'class' : 'form-control' }}) }}
+                    {{ form_errors(form.name) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.type) }}
+                    {{ form_widget(form.type, {'attr' : { 'class' : 'form-control' }}) }}
+                    {{ form_errors(form.type) }}
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    {{ form_label(form.year) }}
+                    {{ form_widget(form.year, {'attr' : { 'class' : 'form-control' }}) }}
+                    {{ form_errors(form.year) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.url) }}
+                    {{ form_widget(form.url, {'attr' : { 'class' : 'form-control' }}) }}
+                    {{ form_errors(form.url) }}
+                </div>
+            </div>
+            <div class="col-xs-12 text-right">
+                <div class="form-group">
+                    <a href="{{ path('tvshow_list') }}" class="btn btn-info">Retour liste des séries</a>
+                    {{ form_widget(form.save, {'attr' : {'class' : 'btn btn-success'}}) }}
+                </div>
+            </div>
+        {{ form_end(form) }}
+    {% endblock %}
 {% endblock %}

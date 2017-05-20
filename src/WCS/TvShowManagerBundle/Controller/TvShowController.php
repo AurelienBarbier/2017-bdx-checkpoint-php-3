@@ -21,34 +21,43 @@ class TvShowController extends Controller
 
     public function modifAction(Request $request, TvShow $tvShow)
     {
-        $editForm = $this->createForm('WCS\TvShowManagerBundle\Form\TvShowType', $$tvShow);
-        $editForm->handleRequest($request);
+        $form = $this->createForm('WCS\TvShowManagerBundle\Form\TvShowType', $tvShow);
+        $form->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash(
+                'success',
+                'La série '.$tvShow->getName().' a bien été modifiée'
+            );
 
             return $this->redirectToRoute('tvshow_list');
         }
 
-return $this->render('questions/edit.html.twig', array(
-    'question' => $question,
-    'edit_form' => $editForm->createView(),
-));
+        return $this->render('WCSTvShowManagerBundle:TvShow:modif.html.twig', array(
+            'tvshow' => $tvShow,
+            'form' => $form->createView(),
+        ));
     }
 
     public function addAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $tvshow = new TvShow();
-        $form = $this->createForm('WCS\TvShowManagerBundle\Form\TvShowType', $tvshow);
+        $tvShow = new TvShow();
+        $form = $this->createForm('WCS\TvShowManagerBundle\Form\TvShowType', $tvShow);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $tvshow = $form->getData();
-            $em->persist($tvshow);
+            $tvShow = $form->getData();
+            $em->persist($tvShow);
             $em->flush();
+
+            $this->addFlash(
+                'success',
+                'La série '.$tvShow->getName().' a bien été ajoutée'
+            );
 
             return $this->redirectToRoute('tvshow_list');
         }
@@ -58,15 +67,16 @@ return $this->render('questions/edit.html.twig', array(
         ));
     }
 
-    public function deleteAction($id)
+    public function deleteAction(TvShow $tvShow)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $tvshow = $em->getRepository('WCSTvShowManagerBundle:TvShow')
-            ->findOneBy(array('id' => $id));
-
-        $em->remove($tvshow);
+        $em->remove($tvShow);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'La série '.$tvShow->getName().' a bien été supprimée'
+        );
 
         return $this->redirectToRoute('tvshow_list');
     }

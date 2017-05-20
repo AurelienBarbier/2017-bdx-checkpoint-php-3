@@ -1,7 +1,10 @@
-{% extends "::base.html.twig" %}
+{% extends "WCSTvShowManagerBundle:Episode:add.html.twig" %}
 
-{% block title %}WCSTvShowManagerBundle:Episode:modif{% endblock %}
+{% block title %}{{ parent() }} - Modification épisode{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Episode:modif page</h1>
+    <h1>Modification de l'épisode {{ episode.name }}</h1>
+    {% block form_add_episode %}
+        {{ parent() }}
+    {% endblock %}
 {% endblock %}

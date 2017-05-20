@@ -3,6 +3,7 @@
 namespace WCS\TvShowManagerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Episode
@@ -24,12 +25,21 @@ class Episode
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     * @Assert\Type("string")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255)
+     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var int
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type("int")
      *
      * @ORM\Column(name="season", type="integer")
      */
@@ -38,12 +48,18 @@ class Episode
     /**
      * @var int
      *
+     * @Assert\NotBlank()
+     * @Assert\Type("int")
+     *
      * @ORM\Column(name="number", type="integer")
      */
     private $number;
 
     /**
      * @var int
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type("int")
      *
      * @ORM\Column(name="note", type="integer")
      */
