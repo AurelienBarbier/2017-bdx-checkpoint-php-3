@@ -1,0 +1,33 @@
+{% extends '@TvShowManager/layout.html.twig' %}
+
+{% block body %}
+
+	<div class="row">
+		<img class="responsive-img" src="{{serie.url}}">
+	</div>
+	<div class="row">
+		<h1>{{ serie.name }}</h1>
+		<p><strong>{{serie.type}}</strong> - <strong>{{serie.year}}</strong></p>
+		{% for episode in serie.episodes %}
+			<div class="col s12 m4 l3">
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title">{{episode.name}}</span>
+						<a href="{{ path('episode_manager_show', {'id' : episode.id }) }}" class="btn-floating halfway-fab waves-effect waves-light red">
+							<i class="material-icons">visibility</i>
+						</a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="row">
+		<a href="{{ path('tv_show_manager_edit', {'id':serie.id}) }}" class="waves-effect waves-light btn">
+			<i class="material-icons right">edit</i>Editer
+		</a>
+		<a href="{{ path('tv_show_manager_delete', {'id':serie.id}) }}" class="waves-effect waves-light btn">
+			<i class="material-icons right">delete</i>Supprimer
+		</a>
+	</div>
+
+{% endblock %}

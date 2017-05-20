@@ -1,0 +1,13 @@
+{% extends '@TvShowManager/layout.html.twig' %}
+
+{% block body %}
+	{{ form_start(episode_form) }}
+
+	{{ form_widget(episode_form) }}
+	<div class="input-field col s12">
+		{{ form_widget(episode_form.tvShow) }}
+		{{ form_label(episode_form.tvShow) }}
+		{{ form_errors(episode_form.tvShow) }}
+	</div>
+	{{ form_end(episode_form) }}
+{% endblock %}

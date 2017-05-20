@@ -1,0 +1,28 @@
+{% extends '@TvShowManager/layout.html.twig' %}
+
+{% block body %}
+	<div class="row">
+		<img src="{{ episode.tvShow.url }}" class="responsive-img">
+	</div>
+	<div class="row">
+		<h1>{{ episode.name }}</h1>
+		<p>
+			<strong>{{ episode.tvShow.name }} :</strong> Saison {{ episode.season }}, Ep. {{ episode.number }}
+		</p>
+		<p>
+			Note: {{ episode.note }}
+		</p>
+		<p>
+			<a href="{{ path("tv_show_manager_show", { 'id' : episode.id }) }}">Retour a la serie.</a>
+		</p>
+	</div>
+	<div class="row">
+		<a href="{{ path('episode_manager_edit', {'id':episode.id}) }}" class="waves-effect waves-light btn">
+			<i class="material-icons right">edit</i>Editer
+		</a>
+		<a href="{{ path('episode_manager_delete', {'id':episode.id}) }}" class="waves-effect waves-light btn">
+			<i class="material-icons right">delete</i>Supprimer
+		</a>
+	</div>
+
+{% endblock %}
