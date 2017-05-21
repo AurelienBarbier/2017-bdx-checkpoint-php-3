@@ -156,8 +156,5 @@ class TvShow
         return $this->year;
     }
 
-   // public function __toString() {
-   //     return $this->name;
-   //}
 }
 

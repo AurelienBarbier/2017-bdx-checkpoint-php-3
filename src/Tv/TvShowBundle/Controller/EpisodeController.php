@@ -14,12 +14,13 @@ class EpisodeController extends Controller
 
         $episodes = $em->getRepository('TvTvShowBundle:Episode')->findAll();
 
-        return $this->render('episode/index.html.twig', array (
+        return $this->render('episode/index.html.twig', array(
             'episodes' => $episodes,
         ));
+    }
 
     public function newAction(Request $request){
-        $episode = new Epsiode();
+        $episode = new Episode();
         $form = $this->createForm('Tv\TvShowBundle\Form\EpisodeType', $episode);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
@@ -30,7 +31,7 @@ class EpisodeController extends Controller
         return $this->redirectToRoute('episode_show', array('id'=>$episode->getId()));
         }
 
-        return $this->render('epsiode/new.html.twig', array(
+        return $this->render('episode/new.html.twig', array(
             'episode' => $episode,
             'form' => $form->createView(),
         ));
@@ -48,7 +49,7 @@ class EpisodeController extends Controller
         public function editAction(Request $request, Episode $episode)
     {
         $deleteForm = $this->createDeleteForm($episode);
-        $editForm = $this->createForm('Tv\TvShowBundle\Form\EpsiodeType', $episode);
+        $editForm = $this->createForm('Tv\TvShowBundle\Form\EpisodeType', $episode);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -57,7 +58,7 @@ class EpisodeController extends Controller
             return $this->redirectToRoute('episode_edit', array('id' => $episode->getId()));
         }
 
-        return $this->render('epsiode/edit.html.twig', array(
+        return $this->render('episode/edit.html.twig', array(
             'episode' => $episode,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -77,5 +78,14 @@ class EpisodeController extends Controller
         return $this->redirectToRoute('episode_index');
     }
 
+    private function createDeleteForm(Episode $episode)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('episode_delete', array('id' => $episode->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
     }
+
+
 }
