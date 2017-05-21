@@ -2,6 +2,7 @@
 
 namespace TvShowManagerBundle\Repository;
 
+use Doctrine\Common\Persistence\ObjectManager;
 /**
  * TvShowRepository
  *
@@ -10,4 +11,20 @@ namespace TvShowManagerBundle\Repository;
  */
 class TvShowRepository extends \Doctrine\ORM\EntityRepository
 {
+	/**
+	 *
+	 */
+	public function findByNotes(){
+
+		$query = $this->createQueryBuilder('t')
+		->addSelect(' AVG(e.note) AS HIDDEN votes')
+		->join('t.episodes', 'e')
+		->orderBy('votes', 'DESC')
+		->groupBy('e.tvShow')
+		->getQuery();	
+
+		return $query->getArrayResult();
+
+
+	}
 }
