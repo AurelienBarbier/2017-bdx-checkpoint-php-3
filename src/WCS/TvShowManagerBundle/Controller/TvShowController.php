@@ -20,9 +20,9 @@ class TvShowController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $tv_show = $em->getRepository('WCSTvShowManager:TvShow')->findAll();
+        $tv_show = $em->getRepository('WCSTvShowManagerBundle:TvShow')->findAll();
 
-        return $this->render('show.html.twig', array(
+        return $this->render('TvShow/index.html.twig', array(
             'tv_show' => $tv_show,
         ));
     }
@@ -34,7 +34,7 @@ class TvShowController extends Controller
     public function newAction(Request $request)
     {
         $tv_show = new TvShow();
-        $form = $this->createForm('WCS\TvShowManager\Form\TvShowType', $tv_show);
+        $form = $this->createForm('WCS\TvShowManagerBundle\Form\TvShowType', $tv_show);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -45,7 +45,7 @@ class TvShowController extends Controller
             return $this->redirectToRoute('tvshow_index', array('id' => $tv_show->getId()));
         }
 
-        return $this->render('new.html.twig', array(
+        return $this->render('TvShow/new.html.twig', array(
             'tv_show' => $tv_show,
             'form' => $form->createView(),
         ));
@@ -59,7 +59,7 @@ class TvShowController extends Controller
     {
         $deleteForm = $this->createDeleteForm($tv_show);
 
-        return $this->render('show.html.twig', array(
+        return $this->render('TvShow/show.html.twig', array(
             'tv_show' => $tv_show,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -72,7 +72,7 @@ class TvShowController extends Controller
     public function editAction(Request $request, TvShow $tv_show)
     {
         $deleteForm = $this->createDeleteForm($tv_show);
-        $editForm = $this->createForm('WCS\TvShowManager\Form\TvShowType', $tv_show);
+        $editForm = $this->createForm('WCS\TvShowManagerBundle\Form\TvShowType', $tv_show);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -81,7 +81,7 @@ class TvShowController extends Controller
             return $this->redirectToRoute('tvshow_edit', array('id' => $tv_show->getId()));
         }
 
-        return $this->render('edit.html.twig', array(
+        return $this->render('TvShow/edit.html.twig', array(
             'tv_show' => $tv_show,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -106,5 +106,21 @@ class TvShowController extends Controller
         return $this->redirectToRoute('tvshow_index');
     }
 
+    /**
+     * Creates a form to delete a flight entity.
+     *
+     * @param TvShow $tv_show The tv_show entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(TvShow $tv_show)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('tvshow_delete', array('id' => $tv_show->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
+    }
 
 }
+

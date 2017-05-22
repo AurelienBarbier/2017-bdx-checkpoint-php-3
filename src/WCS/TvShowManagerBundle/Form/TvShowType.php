@@ -23,7 +23,7 @@ class TvShowType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'WCS\TvShowManager\Entity\TvShow'
+            'data_class' => 'WCS\TvShowManagerBundle\Entity\TvShow'
         ));
     }
 
@@ -37,4 +37,7 @@ class TvShowType extends AbstractType
 
 
 }
+
+{
+
 
