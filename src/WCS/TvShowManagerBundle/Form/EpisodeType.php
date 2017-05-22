@@ -1,6 +1,6 @@
 <?php
 
-namespace WCS\TvShowManager\Form;
+namespace WCS\TvShowManagerBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +23,7 @@ class EpisodeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'WCS\TvShowManager\Entity\TvShow'
+            'data_class' => 'WCS\TvShowManagerBundle\Entity\Episode'
         ));
     }
 
@@ -32,7 +32,7 @@ class EpisodeType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'wcs_tvshow';
+        return 'wcs_episode';
     }
 
 

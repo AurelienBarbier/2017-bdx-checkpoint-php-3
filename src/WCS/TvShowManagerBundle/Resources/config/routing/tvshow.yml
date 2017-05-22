@@ -15,11 +15,11 @@ tvshow_new:
 
 tvshow_edit:
     path:     /{id}/edit
-    defaults: { _controller: "WCSTvShowBundle:TvShow:edit" }
+    defaults: { _controller: "WCSTvShowManagerBundle:TvShow:edit" }
     methods:  [GET, POST]
 
 tvshow_delete:
     path:     /{id}/delete
-    defaults: { _controller: "WCSTvShowBundle:TvShow:delete" }
+    defaults: { _controller: "WCSTvShowManagerBundle:TvShow:delete" }
     methods:  DELETE
 

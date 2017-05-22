@@ -3,6 +3,7 @@
 {% block body %}
     <h1>Episode</h1>
 
+
     <table>
         <tbody>
             <tr>
@@ -14,18 +15,22 @@
                 <td>{{ episode.name }}</td>
             </tr>
             <tr>
-                <th>Type</th>
-                <td>{{ episode.type }}</td>
+                <th>Season</th>
+                <td>{{ episode.season }}</td>
             </tr>
             <tr>
-                <th>Image</th>
-                <td>{{ episode.url }}</td>
+                <th>Number</th>
+                <td>{{ episode.number }}</td>
             </tr>
             <tr>
-                <th>Year</th>
-                <td>{{ episode.year }}</td>
+                <th>Note</th>
+                <td>{{ episode.note }}</td>
             </tr>
 
+            tr>
+            <th>TvShow</th>
+            <td>{{ episode.tvshow }}</td>
+            </tr>
         </tbody>
     </table>
 

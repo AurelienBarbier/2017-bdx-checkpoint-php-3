@@ -1,6 +1,6 @@
 <?php
 
-namespace WCS\EpisodeManagerBundle\Controller;
+namespace WCS\TvShowManagerBundle\Controller;
 
 use WCS\TvShowManagerBundle\Entity\Episode;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,9 +20,9 @@ class EpisodeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $episode = $em->getRepository('WCSEpisodeManager:Episode')->findAll();
+        $episode = $em->getRepository('WCSTvShowManagerBundle:Episode')->findAll();
 
-        return $this->render('', array(
+        return $this->render('Episode/index.html.twig', array(
             'episode' => $episode,
         ));
     }
@@ -34,7 +34,7 @@ class EpisodeController extends Controller
     public function newAction(Request $request)
     {
         $episode = new Episode();
-        $form = $this->createForm('WCS\TvShowManager\Form\EpisodeType', $episode);
+        $form = $this->createForm('WCS\TvShowManagerBundle\Form\EpisodeType', $episode);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -45,7 +45,7 @@ class EpisodeController extends Controller
             return $this->redirectToRoute('episode_index', array('id' => $episode->getId()));
         }
 
-        return $this->render('new.html.twig', array(
+        return $this->render('Episode/new.html.twig', array(
             'episode' => $episode,
             'form' => $form->createView(),
         ));
@@ -59,20 +59,20 @@ class EpisodeController extends Controller
     {
         $deleteForm = $this->createDeleteForm($episode);
 
-        return $this->render('show.html.twig', array(
+        return $this->render('Episode/show.html.twig', array(
             'episode' => $episode,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing Episode entity.
+     * Displays a form to edit an existing episode entity.
      *
      */
     public function editAction(Request $request, Episode $episode)
     {
         $deleteForm = $this->createDeleteForm($episode);
-        $editForm = $this->createForm('WCS\TvShowManager\Form\EpisodeType', $episode);
+        $editForm = $this->createForm('WCS\TvShowManagerBundle\Form\EpisodeType', $episode);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -81,7 +81,7 @@ class EpisodeController extends Controller
             return $this->redirectToRoute('episode_edit', array('id' => $episode->getId()));
         }
 
-        return $this->render('edit.html.twig', array(
+        return $this->render('Episode/edit.html.twig', array(
             'episode' => $episode,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -103,8 +103,24 @@ class EpisodeController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('episode_index:');
+        return $this->redirectToRoute('episode_index');
     }
 
+    /**
+     * Creates a form to delete a episode entity.
+     *
+     * @param Episode $episode The episode entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Episode $episode)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('episode_delete', array('id' => $episode->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
+    }
 
 }
+

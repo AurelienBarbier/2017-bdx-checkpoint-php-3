@@ -107,7 +107,7 @@ class TvShowController extends Controller
     }
 
     /**
-     * Creates a form to delete a flight entity.
+     * Creates a form to delete a tv_show entity.
      *
      * @param TvShow $tv_show The tv_show entity
      *

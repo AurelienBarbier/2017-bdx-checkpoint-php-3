@@ -8,10 +8,10 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Url</th>
-            <th>Type</th>
-            <th>Year</th>
-            <th>Actions</th>
+            <th>Season</th>
+            <th>Number</th>
+            <th>Note</th>
+            <th>TvShow</th>
         </tr>
         </thead>
         <tbody>
@@ -19,9 +19,12 @@
             <tr>
                 <td><a href="{{ path('episode_show', { 'id': episode.id }) }}">{{ episode.id }}</a></td>
                 <td>{{ episode.name }}</td>
-                <td>{{ episode.url }}</td>
-                <td>{{ episode.type }}</td>
+                <td>{{ episode.season }}</td>
+                <td>{{ episode.number }}</td>
                 <td>{{ episode.year }}</td>
+                <td>{{ episode.note }}</td>
+                <td>{{ episode.tvshow }}</td>
+
                 <td>
                     <ul>
                         <li>

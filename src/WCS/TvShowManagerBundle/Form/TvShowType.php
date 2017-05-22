@@ -1,6 +1,6 @@
 <?php
 
-namespace WCS\TvShowManager\Form;
+namespace WCS\TvShowManagerBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -38,6 +38,6 @@ class TvShowType extends AbstractType
 
 }
 
-{
+
 
 
