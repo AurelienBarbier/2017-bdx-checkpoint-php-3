@@ -1,6 +1,7 @@
 <?php
 
 namespace WCS\TvShowManagerBundle\Repository;
+use WCS\TvShowManagerBundle\WCSTvShowManagerBundle;
 
 /**
  * TvShowRepository
@@ -10,4 +11,17 @@ namespace WCS\TvShowManagerBundle\Repository;
  */
 class TvShowRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findTvShowByNote()
+    {
+        $query = $this->_em->createQuery(
+            'SELECT t, AVG(e.note) note
+                  FROM WCSTvShowManagerBundle:TvShow t
+                  JOIN WCSTvShowManagerBundle:Episode e
+                  WHERE t.id=e.tvshow
+                  GROUP BY t.id
+                  ORDER BY note DESC'
+        );
+
+        return $query->getResult();
+    }
 }

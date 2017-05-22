@@ -12,7 +12,7 @@ class TvShowController extends Controller
 {
     public function listAction()
     {
-        $tvShow = $this->getDoctrine()->getRepository('WCSTvShowManagerBundle:TvShow')->findAll();
+        $tvShow = $this->getDoctrine()->getRepository('WCSTvShowManagerBundle:TvShow')->findTvShowByNote();
 
         return $this->render('WCSTvShowManagerBundle:TvShow:list.html.twig', array(
             'tvshows' => $tvShow
