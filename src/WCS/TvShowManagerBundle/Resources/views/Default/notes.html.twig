@@ -7,7 +7,22 @@
             <ul class="collection with-header">
                 <li class="collection-header"><h4>Notes</h4></li>
                 {% for tvshow in tvShows %}
-                <li class="collection-item"><div class="center-align"><div class="left"><span>{{ tvshow.moy }} <i class="small material-icons">grade</i></span></div><span class="">{{ tvshow.obj.name }}</span><a href="{{ path('wcs_tv_show_manager_episode', {id : tvshow.obj.id}) }}" class="secondary-content"><i class="material-icons">send</i></a><br></div></li>
+                <li class="collection-item">
+                    <div class="center-align">
+                        <div class="left">
+                            <span>
+                                {{ tvshow.moyNotes }}
+                                <i class="small material-icons">grade</i>
+                            </span>
+                        </div>
+                        <span class="">
+                            {{ tvshow[0].name }}
+                        </span>
+                        <a href="{{ path('wcs_tv_show_manager_episode', {id : tvshow[0].id}) }}" class="secondary-content">
+                            <i class="material-icons">send</i>
+                        </a><br>
+                    </div>
+                </li>
                 {% endfor %}
             </ul>
         </div>

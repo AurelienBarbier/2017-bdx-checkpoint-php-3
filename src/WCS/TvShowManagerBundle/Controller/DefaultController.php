@@ -78,24 +78,8 @@ class DefaultController extends Controller
     public function notesAction($id = -1){
         $em = $this->getDoctrine()->getManager();
         $tvShows = $em->getRepository('WCSTvShowManagerBundle:TvShow')
-            ->findBy(array(), array('id' => 'desc'));
-        $tvlist = array();
-        foreach ($tvShows as $tvShow){
-            $episodes = $tvShow->getEpisodes();
-            $note = 0;
-            foreach ( $episodes as $episode){
-                $note = $note+$episode->getNote();
-            }
-            $note = $note/count($episodes);
-            array_push($tvlist, array('moy' => round($note, 2), 'obj' => $tvShow));
-        }
-        usort($tvlist, function($a, $b){
-            if ($a['moy'] == $b['moy']) {
-                return 0;
-            }
-            return ($a['moy'] < $b['moy']) ? 1 : -1;
-        });
-        return $this->render('WCSTvShowManagerBundle:Default:notes.html.twig', array('tvShows' => $tvlist));
+            ->findAllSortedByNotes();
+        return $this->render('WCSTvShowManagerBundle:Default:notes.html.twig', array('tvShows' => $tvShows));
 
     }
 }

@@ -10,4 +10,16 @@ namespace WCS\TvShowManagerBundle\Repository;
  */
 class TvShowRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findAllSortedByNotes()
+    {
+        $querry =  $this->createQueryBuilder('tvShowTable')
+            ->select('AVG(episodetable.note) AS moyNotes', 'tvShowTable')
+            ->leftJoin('tvShowTable.episodes', 'episodetable')
+            ->orderBy('moyNotes', 'DESC')
+            ->groupBy('tvShowTable');
+
+        return $querry->getQuery()->getResult();
+
+    }
 }
