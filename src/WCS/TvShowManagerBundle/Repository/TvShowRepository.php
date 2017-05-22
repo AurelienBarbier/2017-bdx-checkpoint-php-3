@@ -14,10 +14,19 @@ class TvShowRepository extends \Doctrine\ORM\EntityRepository
     public function findAllSortedByNotes()
     {
         $querry =  $this->createQueryBuilder('tvShowTable')
-            ->select('AVG(episodetable.note) AS moyNotes', 'tvShowTable')
+            // FROM $this->entityname AS tvShowTable;
+            ->select('AVG(episodetable.note) AS  moyNotes', 'tvShowTable')
+            // SELECT AVG(episodetable.note) AS moyNotes;
             ->leftJoin('tvShowTable.episodes', 'episodetable')
+            // LEFT JOIN tvShowTable.episodes episodetable
             ->orderBy('moyNotes', 'DESC')
+            // ORDER BY moyNotes DESC
             ->groupBy('tvShowTable');
+            // GROUP BY tvShowTable
+
+
+        //SELECT AVG(episodetable.note) AS moyNotes, tvShowTable FROM WCS\TvShowManagerBundle\Entity\TvShow tvShowTable LEFT JOIN tvShowTable.episodes episodetable GROUP BY tvShowTable ORDER BY moyNotes DESC'
+
 
         return $querry->getQuery()->getResult();
 
