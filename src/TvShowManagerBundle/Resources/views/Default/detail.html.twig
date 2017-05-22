@@ -1,0 +1,8 @@
+
+
+  {{ tvShow.name }} - {{tvShow.type}} - {{tvShow.year}}<br>
+
+        {% for episode in tvShow.episodes %}
+
+                     {{episode.name}} <br>
+        {% endfor %}
