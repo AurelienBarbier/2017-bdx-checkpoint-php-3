@@ -1,0 +1,35 @@
+{% extends '@TvShowManager/layout.html.twig' %}
+
+{% block body %}
+
+	<div class="row">
+		<img class="responsive-img" src="{{tvShow.url}}">
+	</div>
+	<div class="row">
+		<h1>{{ tvShow.name }}</h1>
+		<p><strong>{{tvShow.type}}</strong> - <strong>{{tvShow.year}}</strong></p>
+		
+		{% for episode in tvShow.episodes %}
+			<div class="col s12 m4 l3">
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title">{{episode.name}}</span>
+						<a href="{{ path('tv_show_manager_episode_detail', {'id' : episode.id }) }}" class="btn-floating halfway-fab waves-effect waves-light red">
+							<i class="material-icons">visibility</i>
+						</a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+		
+	</div>
+	<div class="row">
+		<a href="{{ path('tv_show_manager_edit', {'id':tvShow.id}) }}" class="waves-effect waves-light btn">
+			<i class="material-icons right">edit</i>Editer
+		</a>
+		<a href="{{ path('tv_show_manager_delete', {'id':tvShow.id}) }}" class="waves-effect waves-light btn">
+			<i class="material-icons right">delete</i>Supprimer
+		</a>
+	</div>
+
+{% endblock %}

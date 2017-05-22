@@ -2,4 +2,6 @@ subject:
     resource: "@SubjectBundle/Controller/"
     type:     annotation
     prefix:   /
-
+tv_show_manager:
+    resource: "@TvShowManagerBundle/Resources/config/routing.yml"
+    prefix:   /tvshow
