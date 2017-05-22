@@ -55,11 +55,6 @@ class TvShow
      */
     private $episodes;
 
-    /**
-     *
-     */
-    private $note;
-
 
     /**
      * Get id
@@ -181,21 +176,6 @@ class TvShow
         $this->episodes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    /**
-     *
-     */
-    public function __call($param, $test){
-        switch ($param) {
-            case 'avg':
-            return null;
-            break;
-            
-            default:
-                # code...
-            break;
-        }
-        return null;
-    }
 
     /**
      * Add episode
@@ -229,5 +209,14 @@ class TvShow
     public function getEpisodes()
     {
         return $this->episodes;
+    }
+
+    public function getNote(){
+        $note = 0;
+        $episodes = $this->episodes;
+        foreach ($episodes as $episode) {
+            $note += $episode->getNote();
+        }
+        return $note/sizeof($episodes);
     }
 }

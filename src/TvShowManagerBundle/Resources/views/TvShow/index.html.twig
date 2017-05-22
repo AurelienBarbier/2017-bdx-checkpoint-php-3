@@ -14,8 +14,8 @@
 					<div class="card-content">
 						<span class="card-title">{{serie.name}}</span>
 						<p>{{serie.type}} - {{serie.year}}</p>
-						{% if serie.avg %}
-							<strong>{{ serie.avg|number_format(1, ',') }}/5</strong>
+						{% if serie.note %}
+							<strong>{{ serie.note|number_format(1, ',') }}/5</strong>
 						{% endif %}
 					</div>
 				</div>

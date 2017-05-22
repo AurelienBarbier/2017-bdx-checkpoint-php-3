@@ -33,12 +33,7 @@ class TvShowController extends Controller
         // On cree notre entity manager, afin d'utiliser la BDD
         $em = $this->getDoctrine()->getEntityManager();
         // Je recupere TOUTES mes series.
-        $a_series = $em->getRepository('TvShowManagerBundle:TvShow')->findByNotes();
-        $series = array();
-        foreach ($a_series as $k_serie => $a_serie) {
-            $a_serie[0]['avg'] = $a_serie['votes'];
-            $series[] = $a_serie[0];
-        }
+        $series = $em->getRepository('TvShowManagerBundle:TvShow')->findByNotes();
         // Je renvois la vue twig de la page d'accueil avec en param ma lsite de series
         return $this->render('TvShowManagerBundle:TvShow:index.html.twig',
             [
