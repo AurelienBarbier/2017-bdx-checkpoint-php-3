@@ -17,14 +17,14 @@ class TvShowRepository extends \Doctrine\ORM\EntityRepository
 	public function findByNotes(){
 
 		$query = $this->createQueryBuilder('t')
-		->addSelect(' AVG(e.note) AS HIDDEN votes')
+		->addSelect('AVG(e.note) as votes')
 		->join('t.episodes', 'e')
 		->orderBy('votes', 'DESC')
 		->groupBy('e.tvShow')
 		->getQuery();	
 
-		return $query->getArrayResult();
+		$result = $query->getArrayResult();
 
-
+		return $result;
 	}
 }

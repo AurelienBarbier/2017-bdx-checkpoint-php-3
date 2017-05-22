@@ -55,6 +55,11 @@ class TvShow
      */
     private $episodes;
 
+    /**
+     *
+     */
+    private $note;
+
 
     /**
      * Get id
@@ -174,6 +179,22 @@ class TvShow
     public function __construct()
     {
         $this->episodes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     *
+     */
+    public function __call($param, $test){
+        switch ($param) {
+            case 'avg':
+            return null;
+            break;
+            
+            default:
+                # code...
+            break;
+        }
+        return null;
     }
 
     /**
