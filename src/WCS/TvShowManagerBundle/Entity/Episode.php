@@ -50,12 +50,9 @@ class Episode
     private $note;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="tvshow", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="TvShow", inversedBy="episodes")
      */
-    private $tvshow;
-
+    private $tv_show;
 
     /**
      * Get id
@@ -163,28 +160,32 @@ class Episode
         return $this->note;
     }
 
+
     /**
-     * Set tvshow
+     * Set tvShow
      *
-     * @param string $tvshow
+     * @param \WCS\TvShowManagerBundle\Entity\TvShow $tvShow
      *
      * @return Episode
      */
-    public function setTvshow($tvshow)
+    public function setTvShow(\WCS\TvShowManagerBundle\Entity\TvShow $tvShow = null)
     {
-        $this->tvshow = $tvshow;
+        $this->tv_show = $tvShow;
 
         return $this;
     }
 
     /**
-     * Get tvshow
+     * Get tvShow
      *
-     * @return string
+     * @return \WCS\TvShowManagerBundle\Entity\TvShow
      */
-    public function getTvshow()
+    public function getTvShow()
     {
-        return $this->tvshow;
+        return $this->tv_show;
+    }
+
+    public function __toString() {
+        return $this->name;
     }
 }
-

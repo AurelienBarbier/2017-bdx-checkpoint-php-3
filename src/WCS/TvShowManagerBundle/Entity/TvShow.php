@@ -21,6 +21,8 @@ class TvShow
      */
     private $id;
 
+
+
     /**
      * @var string
      *
@@ -49,6 +51,12 @@ class TvShow
      */
     private $year;
 
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Episode", mappedBy="tv_show")
+     */
+    private $episodes;
 
 
     /**
@@ -156,5 +164,48 @@ class TvShow
     {
         return $this->year;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->episodes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add episode
+     *
+     * @param \WCS\TvShowManagerBundle\Entity\Episode $episode
+     *
+     * @return TvShow
+     */
+    public function addEpisode(\WCS\TvShowManagerBundle\Entity\Episode $episode)
+    {
+        $this->episodes[] = $episode;
+
+        return $this;
+    }
+
+    /**
+     * Remove episode
+     *
+     * @param \WCS\TvShowManagerBundle\Entity\Episode $episode
+     */
+    public function removeEpisode(\WCS\TvShowManagerBundle\Entity\Episode $episode)
+    {
+        $this->episodes->removeElement($episode);
+    }
+    public function __toString() {
+        return $this->name;
+    }
+
+    /**
+     * Get episodes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEpisodes()
+    {
+        return $this->episodes;
+    }
+}
