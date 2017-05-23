@@ -1,0 +1,50 @@
+tv_show_manager_homepage:
+    path:     /
+    defaults:
+        _controller: TvShowManagerBundle:TvShow:index
+tv_show_manager_votes:
+    path:     /votes
+    defaults:
+        _controller: TvShowManagerBundle:TvShow:votes
+tv_show_manager_add:
+    path:     /add
+    defaults:
+        _controller: TvShowManagerBundle:TvShow:add
+tv_show_manager_show:
+    path:     /{id}
+    defaults:
+        _controller: TvShowManagerBundle:TvShow:show
+    requirements:
+        id: \d+
+tv_show_manager_edit:
+    path:     /{id}/edit
+    defaults:
+        _controller: TvShowManagerBundle:TvShow:edit
+    requirements:
+        id: \d+
+tv_show_manager_delete:
+    path:    /{id}/delete
+    defaults:
+        _controller: TvShowManagerBundle:TvShow:delete
+    requirements:
+        id: \d+
+episode_manager_add:
+    path:     /episode/add
+    defaults:
+        _controller: TvShowManagerBundle:Episode:add
+episode_manager_show:
+    path:     /episode/{id}
+    defaults:
+        _controller: TvShowManagerBundle:Episode:show
+    requirements:
+        id: \d+
+episode_manager_edit:
+    path:     /episode/{id}/edit
+    defaults:
+        _controller: TvShowManagerBundle:Episode:edit
+episode_manager_delete:
+    path:     /episode/{id}/delete
+    defaults:
+        _controller: TvShowManagerBundle:Episode:delete
+    requirements:
+        id: \d+
