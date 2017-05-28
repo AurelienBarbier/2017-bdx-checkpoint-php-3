@@ -1,0 +1,48 @@
+{% extends '@TvShowManager/layout.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-3">
+            <img src="{{ tvShow.url }}" alt="{{ tvShow.name }}" height="100px">
+        </div>
+        <div class="col-xs-3">
+            <h2>{{ tvShow.name }}</h2>
+            <h4>{{ tvShow.type }}, <small>{{ tvShow.year }}</small></h4>
+        </div>
+        <div class="col-xs-6">
+            <a href="{{ path('episode_add', {'name': tvShow.name}) }}">
+                <button type="button" class="btn-success">Ajouter un épisode</button>
+            </a>
+        </div>
+
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Saison</th>
+            <th>Numéro</th>
+            <th>Nom</th>
+            <th>Note</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for episode in tvShow.episodes %}
+            <tr>
+                <td>{{ episode.season }}</td>
+                <td>{{ episode.number }}</td>
+                <td>{{ episode.name }}</td>
+                <td>{{ episode.note }}</td>
+                <td>
+                    <a href="{{ path('episode_edit', {'id':episode.id}) }}">Modifier</a>
+                    <span> / </span>
+                    <a href="{{ path('episode_delete', {'id':episode.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

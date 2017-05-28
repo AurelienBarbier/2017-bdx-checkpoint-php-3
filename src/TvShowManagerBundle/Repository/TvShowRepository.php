@@ -10,11 +10,17 @@ namespace TvShowManagerBundle\Repository;
  */
 class TvShowRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findShowsWithEpisodes() {
-        $qb = $this->createQueryBuilder('s');
 
-        $qb
-            ->join('s.episodes', 'e')
-            ->addSelect('e');
+    public function findShowsByAvgNote() {
+
+        $qb = $this->createQueryBuilder('s')
+            ->addSelect('AVG(e.note) AS avgNote')
+            ->leftJoin('s.episodes', 'e')
+            ->orderBy('avgNote', 'DESC')
+            ->groupBy('s')
+            ;
+
+        return $qb->getQuery()->getResult();
     }
+
 }

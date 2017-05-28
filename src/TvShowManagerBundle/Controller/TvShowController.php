@@ -20,6 +20,13 @@ class TvShowController extends Controller
         ));
     }
 
+    public function showAction(TvShow $tvShow) {
+
+        return $this->render('@TvShowManager/TvShow/show.html.twig', array(
+            'tvShow' => $tvShow,
+        ));
+    }
+
     public function addAction(Request $request)
     {
         $tvShow = new TvShow();
@@ -40,12 +47,8 @@ class TvShowController extends Controller
         ));
     }
 
-    public function editAction(Request $request, $tvShowName)
+    public function editAction(Request $request, TvShow $tvShow)
     {
-        $em = $this->getDoctrine()->getManager();
-        $tvShow = $em->getRepository('TvShowManagerBundle:TvShow')
-            ->findOneByName($tvShowName);
-
         $form = $this->createForm(TvShowType::class, $tvShow);
 
         $form->handleRequest($request);
@@ -61,12 +64,9 @@ class TvShowController extends Controller
         ));
     }
 
-    public function deleteAction(Request $request, $tvShowName)
+    public function deleteAction(Request $request, TvShow $tvShow)
     {
         $em = $this->getDoctrine()->getManager();
-        $tvShow = $em->getRepository('TvShowManagerBundle:TvShow')
-            ->findOneByName($tvShowName);
-
         $em->remove($tvShow);
         $em->flush();
 
@@ -77,7 +77,8 @@ class TvShowController extends Controller
 
     public function noteAction()
     {
-        $avgNotes=[];
+        /*$avgNotes=[];
+
         $em = $this->getDoctrine()->getManager();
         $tvShows = $em->getRepository('TvShowManagerBundle:TvShow')
             ->findAll();
@@ -90,10 +91,15 @@ class TvShowController extends Controller
             $avgNote = $sumNote / count($show->getEpisodes());
             $avgNotes[$show->getName()] = $avgNote;
         }
-        arsort($avgNotes);
+
+        arsort($avgNotes);*/
+
+        $em = $this->getDoctrine()->getManager();
+        $showsByNote = $em->getRepository(TvShow::class)
+            ->findShowsByAvgNote();
 
         return $this->render('@TvShowManager/TvShow/note.html.twig', array(
-            'avgNotes' => $avgNotes,
+            'showsByNote' => $showsByNote,
         ));
     }
 }

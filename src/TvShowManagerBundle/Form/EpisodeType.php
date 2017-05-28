@@ -19,11 +19,6 @@ class EpisodeType extends AbstractType
                 'label' => "Nom",
                 'attr' => array('class' => 'form-control'),
             ))
-            ->add('tvShow', EntityType::class, array(
-                'class' => TvShow::class,
-                'choice_label' => 'name',
-                'attr' => array('class' => 'form-control'),
-            ))
             ->add('season', IntegerType::class, array(
                 'label' => "Saison",
                 'attr' => array('class' => 'form-control'),

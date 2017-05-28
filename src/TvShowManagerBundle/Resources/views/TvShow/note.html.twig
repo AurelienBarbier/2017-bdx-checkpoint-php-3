@@ -12,10 +12,10 @@
         </tr>
         </thead>
         <tbody>
-        {% for show in avgNotes|keys %}
+        {% for show in showsByNote %}
             <tr>
-                <td>{{ show }}</td>
-                <td>{{ avgNotes[show] }}</td>
+                <td>{{ show[0].name }}</td>
+                <td>{{ show.avgNote|number_format(1) }}</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -3,37 +3,37 @@ tv_show_manager_homepage:
     defaults: { _controller: TvShowManagerBundle:Default:index }
 
 tv_shows_list:
-    path:     /tvshow
-    defaults: { _controller: TvShowManagerBundle:TvShow:list}
+    path:     /shows
+    defaults: { _controller: TvShowManagerBundle:TvShow:list }
 
 tv_shows_add:
-    path:     /tvshow/add
-    defaults: { _controller: TvShowManagerBundle:TvShow:add}
+    path:     /shows/add
+    defaults: { _controller: TvShowManagerBundle:TvShow:add }
+
+tv_shows_show:
+    path:     /shows/show/{name}
+    defaults: { _controller: TvShowManagerBundle:TvShow:show }
 
 tv_shows_edit:
-    path:     /tvshow/edit/{tvShowName}
-    defaults: { _controller: TvShowManagerBundle:TvShow:edit}
+    path:     /shows/edit/{name}
+    defaults: { _controller: TvShowManagerBundle:TvShow:edit }
 
 tv_shows_delete:
-    path:     /tvshow/delete/{tvShowName}
-    defaults: { _controller: TvShowManagerBundle:TvShow:delete}
-
-episodes_list:
-    path:     /episode
-    defaults: { _controller: TvShowManagerBundle:Episode:list}
+    path:     /shows/delete/{name}
+    defaults: { _controller: TvShowManagerBundle:TvShow:delete }
 
 episode_add:
-    path:     /episode/add
-    defaults: { _controller: TvShowManagerBundle:Episode:add}
+    path:     /episodes/{name}/add
+    defaults: { _controller: TvShowManagerBundle:Episode:add }
 
 episode_edit:
-    path:     /episode/edit/{episodeId}
-    defaults: { _controller: TvShowManagerBundle:Episode:edit}
+    path:     /episodes/edit/{id}
+    defaults: { _controller: TvShowManagerBundle:Episode:edit }
 
 episode_delete:
-    path:     /episode/delete/{episodeId}
-    defaults: { _controller: TvShowManagerBundle:Episode:delete}
+    path:     /episodes/delete/{id}
+    defaults: { _controller: TvShowManagerBundle:Episode:delete }
 
-note_list:
-    path:     /note
-    defaults: { _controller: TvShowManagerBundle:TvShow:note}
+tv_shows_classement:
+    path:     /shows/classement
+    defaults: { _controller: TvShowManagerBundle:TvShow:note }
