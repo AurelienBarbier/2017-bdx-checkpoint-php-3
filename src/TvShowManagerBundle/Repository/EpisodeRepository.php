@@ -44,7 +44,7 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
     }
 
     // Atelier SQL / DQL / QB - Exercice 3
-    public function findWorstEpisode() {
+    public function findWorstEpisodeQB() {
 
         $qb = $this->createQueryBuilder('e')
             ->orderBy('e.note')
@@ -55,7 +55,7 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
     }
 
     // Atelier SQL / DQL / QB - Exercice 4
-    public function findBestEpisodeByTvShow(TvShow $tvShow) {
+    public function findBestEpisodeByTvShowQB(TvShow $tvShow) {
 
         $qb = $this->createQueryBuilder('e')
             ->where('e.tvShow = :tvShow')
@@ -68,7 +68,7 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
     }
 
     // Atelier SQL / DQL / QB - Exercice 6
-    public function find3BestEpisodes() {
+    public function find3BestEpisodesQB() {
 
         $qb = $this->createQueryBuilder('e')
             ->addSelect('s.name')
@@ -81,7 +81,7 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
     }
 
     // Atelier SQL / DQL / QB - Exercice 9
-    public function countEpisodesBySeason() {
+    public function countEpisodesBySeasonQB() {
 
         $qb = $this->createQueryBuilder('e')
             ->select('s.name', 'e.season', 'COUNT(e) AS nb_episodes')
@@ -94,7 +94,7 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
     }
 
     // Atelier SQL / DQL / QB - Exercice 10
-    public function avgNoteBySeasonByTvShow() {
+    public function avgNoteBySeasonByTvShowQB() {
 
         $qb = $this->createQueryBuilder('e')
             ->select('s.name', 'e.season', 'AVG(e.note) AS avg_note')

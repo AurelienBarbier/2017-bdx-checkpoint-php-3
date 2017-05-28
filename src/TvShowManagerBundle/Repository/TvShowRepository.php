@@ -25,7 +25,7 @@ class TvShowRepository extends \Doctrine\ORM\EntityRepository
     }
 
     // Atelier SQL / DQL / QB - Exercice 5
-    public function find3WorstTvShows() {
+    public function find3WorstTvShowsQB() {
 
         $qb = $this->createQueryBuilder('s')
             ->addSelect('AVG(e.note) AS HIDDEN avg_note' )
@@ -39,7 +39,7 @@ class TvShowRepository extends \Doctrine\ORM\EntityRepository
     }
 
     // Atelier SQL / DQL / QB - Exercice 7
-    public function findLongestTvShow() {
+    public function findLongestTvShowQB() {
 
         $qb = $this->createQueryBuilder('s')
             ->addSelect('COUNT(s) AS nb_episodes' )
@@ -53,7 +53,7 @@ class TvShowRepository extends \Doctrine\ORM\EntityRepository
     }
 
     // Atelier SQL / DQL / QB - Exercice 8
-    public function findTvShowsByYear($year) {
+    public function findTvShowsByYearQB($year) {
 
         $qb = $this->createQueryBuilder('s')
             ->where('s.year < :year')
