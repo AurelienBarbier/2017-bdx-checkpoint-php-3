@@ -37,3 +37,7 @@ episode_delete:
 tv_shows_classement:
     path:     /shows/classement
     defaults: { _controller: TvShowManagerBundle:TvShow:note }
+
+tv_shows_qb:
+    path:     /qb/{num}
+    defaults: { _controller: TvShowManagerBundle:Default:qb }
