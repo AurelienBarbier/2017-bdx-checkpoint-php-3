@@ -41,3 +41,7 @@ tv_shows_classement:
 tv_shows_qb:
     path:     /qb/{num}
     defaults: { _controller: TvShowManagerBundle:Default:qb }
+
+tv_shows_dql:
+    path:     /dql/{num}
+    defaults: { _controller: TvShowManagerBundle:Default:dql }

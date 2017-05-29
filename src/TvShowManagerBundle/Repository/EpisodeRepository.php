@@ -33,6 +33,19 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findAllEpisodesByTvShowDQL(TvShow $tvShow) {
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT e 
+                  FROM TvShowManagerBundle:Episode e
+                  WHERE e.tvShow = :tvShow'
+        );
+        $query->setParameter('tvShow', $tvShow);
+
+        return $query->getResult();
+    }
+
     // Atelier SQL / DQL / QB - Exercice 2
     public function countAllEpisodesQB() {
 
@@ -41,6 +54,17 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
         $qb->select($qb->expr()->count('e'));
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countAllEpisodesDQL() {
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT COUNT(e) 
+                  FROM TvShowManagerBundle:Episode e'
+        );
+
+        return $query->getSingleScalarResult();
     }
 
     // Atelier SQL / DQL / QB - Exercice 3
@@ -52,6 +76,19 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
         ;
 
         return $qb->getQuery()->getSingleResult();
+    }
+
+    public function findWorstEpisodeDQL() {
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT e 
+                  FROM TvShowManagerBundle:Episode e
+                  ORDER BY e.note'
+        );
+        $query->setMaxResults(1);
+
+        return $query->getSingleResult();
     }
 
     // Atelier SQL / DQL / QB - Exercice 4
@@ -67,6 +104,22 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()->getSingleResult();
     }
 
+    public function findBestEpisodeByTvShowDQL(TvShow $tvShow) {
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT e 
+                  FROM TvShowManagerBundle:Episode e
+                  WHERE e.tvShow = :tvShow
+                  ORDER BY e.note DESC'
+        );
+        $query
+            ->setParameter('tvShow',$tvShow)
+            ->setMaxResults(1);
+
+        return $query->getSingleResult();
+    }
+
     // Atelier SQL / DQL / QB - Exercice 6
     public function find3BestEpisodesQB() {
 
@@ -78,6 +131,20 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
         ;
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function find3BestEpisodesDQL() {
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT e, s.name 
+                  FROM TvShowManagerBundle:Episode e
+                  LEFT JOIN e.tvShow s
+                  ORDER BY e.note DESC'
+        );
+        $query->setMaxResults(3);
+
+        return $query->getResult();
     }
 
     // Atelier SQL / DQL / QB - Exercice 9
@@ -93,6 +160,19 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function countEpisodesBySeasonDQL() {
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT s.name, e.season, COUNT(e) AS nb_episodes 
+                  FROM TvShowManagerBundle:Episode e
+                  LEFT JOIN e.tvShow s
+                  GROUP BY s.name, e.season'
+        );
+
+        return $query->getResult();
+    }
+
     // Atelier SQL / DQL / QB - Exercice 10
     public function avgNoteBySeasonByTvShowQB() {
 
@@ -106,4 +186,16 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function avgNoteBySeasonByTvShowDQL() {
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT s.name, e.season, AVG(e.note) AS avg_note
+                  FROM TvShowManagerBundle:Episode e
+                  LEFT JOIN e.tvShow s
+                  GROUP BY s.name, e.season'
+        );
+
+        return $query->getResult();
+    }
 }

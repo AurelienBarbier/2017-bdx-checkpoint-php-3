@@ -1,6 +1,7 @@
 <?php
 
 namespace TvShowManagerBundle\Repository;
+
 use TvShowManagerBundle\Entity\Episode;
 
 /**
@@ -38,6 +39,21 @@ class TvShowRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function find3WorstTvShowsDQL() {
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT s, AVG(e.note) AS HIDDEN avg_note
+                  FROM TvShowManagerBundle:TvShow s
+                  LEFT JOIN s.episodes e
+                  GROUP BY s
+                  ORDER BY avg_note'
+        );
+        $query->setMaxResults(3);
+
+        return $query->getResult();
+    }
+
     // Atelier SQL / DQL / QB - Exercice 7
     public function findLongestTvShowQB() {
 
@@ -52,6 +68,21 @@ class TvShowRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()->getSingleResult();
     }
 
+    public function findLongestTvShowDQL() {
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT s, COUNT(s) AS nb_episodes
+                  FROM TvShowManagerBundle:TvShow s
+                  LEFT JOIN s.episodes e
+                  GROUP BY s
+                  ORDER BY nb_episodes DESC'
+        );
+        $query->setMaxResults(1);
+
+        return $query->getSingleResult();
+    }
+
     // Atelier SQL / DQL / QB - Exercice 8
     public function findTvShowsByYearQB($year) {
 
@@ -61,6 +92,19 @@ class TvShowRepository extends \Doctrine\ORM\EntityRepository
         ;
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function findTvShowsByYearDQL($year) {
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT s
+                  FROM TvShowManagerBundle:TvShow s
+                  WHERE s.year < :year'
+        );
+        $query->setParameter('year', $year);
+
+        return $query->getResult();
     }
 
 }
