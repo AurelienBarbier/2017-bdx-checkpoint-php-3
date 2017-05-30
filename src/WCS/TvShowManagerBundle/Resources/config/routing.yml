@@ -22,6 +22,14 @@ tvshow_delete:
     requirements:
         id: \d+
 
+tvshow_dql:
+    path:    /tvshow/dql
+    defaults: {_controller: WCSTvShowManagerBundle:TvShow:dql}
+
+tvshow_querybuilder:
+    path:    /tvshow/dql
+    defaults: {_controller: WCSTvShowManagerBundle:TvShow:queryBuilder}
+
 episode_list:
     path:     /episode/list/{id}
     defaults: { _controller: WCSTvShowManagerBundle:Episode:list }

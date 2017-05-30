@@ -10,4 +10,52 @@ namespace WCS\TvShowManagerBundle\Repository;
  */
 class EpisodeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function DQLfindAllEpisodeBySerie($id)
+    {
+        $query = $this->_em->createQuery(
+            'SELECT e FROM WCSTvShowManagerBundle:Episode e WHERE e.tvshow = :id')
+            ->setParameter('id', $id);
+
+        return $query->getResult();
+    }
+
+    public function DQLfindNbEpisode()
+    {
+        $query = $this->_em->createQuery(
+            'SELECT count(e.id) FROM WCSTvShowManagerBundle:Episode e');
+
+        return $query->getResult();
+    }
+
+    public function DQLfindWorstEpisode()
+    {
+        $query = $this->_em->createQuery(
+            'SELECT e FROM WCSTvShowManagerBundle:Episode e ORDER BY e.note ASC')
+            ->setMaxResults(1);
+
+        return $query->getResult();
+    }
+
+    public function DQLfindBestEpisodeBySerie($id)
+    {
+        $query = $this->_em->createQuery(
+            'SELECT e FROM WCSTvShowManagerBundle:Episode e WHERE e.tvshow = :id ORDER BY e.note DESC ')
+            ->setParameter('id', $id)
+            ->setMaxResults(1);
+
+        return $query->getResult();
+    }
+
+    public function DQLfindThreeBestEpisode()
+    {
+        $query = $this->_em->createQuery(
+            'SELECT e, t.name AS nom_serie
+                  FROM WCSTvShowManagerBundle:Episode e 
+                  LEFT JOIN WCSTvShowManagerBundle:TvShow t
+                  WHERE e.tvshow = t.id
+                  ORDER BY e.note DESC')
+            ->setMaxResults(3);
+
+        return $query->getResult();
+    }
 }
