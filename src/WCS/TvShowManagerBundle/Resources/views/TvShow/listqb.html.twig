@@ -5,7 +5,7 @@
 {% block body %}
     <div class="row">
         <div class="col-xs-6">
-            <h1>Liste des séries</h1>
+            <h1>Requêtes Query Builder</h1>
         </div>
         <div class="col-xs-6 text-right">
             <a class="btn btn-lg btn-success" href="{{ path('tvshow_add') }}" role="button">
@@ -15,26 +15,44 @@
     </div>
 
     <div class="row">
-        {% for tvshow in tvshows %}
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img class="img-responsive" src={{ tvshow[0].url }} alt="Image de la série">
-                    <div class="caption">
-                        <h3><a href="{{ path('episode_list', { 'id': tvshow[0].id }) }}">{{ tvshow[0].name }}</a></h3>
-                        <p>Type : {{ tvshow[0].type }}</p>
-                        <p>Année de sortie : {{ tvshow[0].year }}</p>
-                        <p>Note : {{ tvshow.note }}</p>
-                        <p>
-                            <a href="{{ path('tvshow_modif', { 'id': tvshow[0].id }) }}" class="btn btn-primary" role="button">
-                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Modifier
-                            </a>
-                            <a href="{{ path('tvshow_delete', { 'id': tvshow[0].id }) }}" class="btn btn-danger" role="button">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer la série
-                            </a>
-                        </p>
+        {{ form_start(form, {'attr' : { 'class' : 'form-inline' }}) }}
+        <div class="form-group">
+            {{ form_widget(form.list, {'attr' : {'class' : 'form-control' }}) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.tvshow, {'attr' : {'class' : 'form-control' }}) }}
+        </div>
+        {{ form_widget(form.save, {'attr' : {'class' : 'btn btn-primary' }}) }}
+        {{ form_end(form) }}
+    </div>
+
+    <div class="row">
+        {{ dump(result) }}
+    </div>
+
+    {#
+        <div class="row">
+            {% for tvshow in tvshows %}
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img class="img-responsive" src={{ tvshow[0].url }} alt="Image de la série">
+                        <div class="caption">
+                            <h3><a href="{{ path('episode_list', { 'id': tvshow[0].id }) }}">{{ tvshow[0].name }}</a></h3>
+                            <p>Type : {{ tvshow[0].type }}</p>
+                            <p>Année de sortie : {{ tvshow[0].year }}</p>
+                            <p>Note : {{ tvshow.note }}</p>
+                            <p>
+                                <a href="{{ path('tvshow_modif', { 'id': tvshow[0].id }) }}" class="btn btn-primary" role="button">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Modifier
+                                </a>
+                                <a href="{{ path('tvshow_delete', { 'id': tvshow[0].id }) }}" class="btn btn-danger" role="button">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer la série
+                                </a>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+        #}
 {% endblock %}

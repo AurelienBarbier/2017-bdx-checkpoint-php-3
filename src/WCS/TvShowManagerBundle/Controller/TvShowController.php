@@ -153,8 +153,71 @@ class TvShowController extends Controller
 
     }
 
-    public function queryBuilder()
+    public function queryBuilderAction(Request $request)
     {
+        $form = $this->createFormBuilder()
+            ->add('list', ChoiceType::class, array(
+                'label' => 'Choix requête',
+                'choices' => array(
+                    "Liste tous les episodes d'une série" => 'findAllEpisodeBySerie',
+                    'Nombre total épisodes' => 'findNbEpisode',
+                    'Episode le moins bien noté' => 'findWorstEpisode',
+                    "Episode le mieux noté d'une série" => 'findBestEpisodeBySerie',
+                    'Les 3 pires séries' => 'findThreeWorstSerie',
+                    'Les 3 meilleurs episodes' => 'findThreeBestEpisode',
+                    "Serie ayant le plus d'épisodes" => 'findSerieByMoreEpisode',
+                    'Séries sorties avant 2000' => 'findSerieByYearBefore2000',
+                    "Toutes les séries avec nombre d'épisodes par saison" => 'findAllSerieWithNbEpisodeBySeason',
+                    "Toutes les séries avec la note moyenne par saison" => 'findAllSerieWithNoteBySeason'
+                )
+            ))
+            ->add('tvshow', EntityType::class, array(
+                'label' => 'Nom de la série',
+                'class' => 'WCSTvShowManagerBundle:TvShow',
+                'choice_label' => 'name'
+            ))
+            ->add('save', SubmitType::class, array('label' => 'Rechercher'))
+            ->getForm();
 
+        switch ($request->request->get('form')['list']) {
+            case 'findAllEpisodeBySerie':
+                $result = $this->getDoctrine()->getRepository('WCSTvShowManagerBundle:Episode')->QBfindAllEpisodeBySerie($request->request->get('form')['tvshow']);
+                break;
+            case 'findNbEpisode':
+                $result = $this->getDoctrine()->getRepository('WCSTvShowManagerBundle:Episode')->QBfindNbEpisode();
+                break;
+            case 'findWorstEpisode':
+                $result = $this->getDoctrine()->getRepository('WCSTvShowManagerBundle:Episode')->QBfindWorstEpisode();
+                break;
+            case 'findBestEpisodeBySerie':
+                $result = $this->getDoctrine()->getRepository('WCSTvShowManagerBundle:Episode')->QBfindBestEpisodeBySerie($request->request->get('form')['tvshow']);
+                break;
+            case 'findThreeWorstSerie':
+                $result = $this->getDoctrine()->getRepository('WCSTvShowManagerBundle:TvShow')->QBfindThreeWorstSerie();
+                break;
+            case 'findThreeBestEpisode':
+                $result = $this->getDoctrine()->getRepository('WCSTvShowManagerBundle:Episode')->QBfindThreeBestEpisode();
+                break;
+            case 'findSerieByMoreEpisode':
+                $result = $this->getDoctrine()->getRepository('WCSTvShowManagerBundle:TvShow')->QBfindSerieByMoreEpisode();
+                break;
+            case 'findSerieByYearBefore2000':
+                $result = $this->getDoctrine()->getRepository('WCSTvShowManagerBundle:TvShow')->QBfindSerieByYearBefore2000();
+                break;
+            case 'findAllSerieWithNbEpisodeBySeason':
+                $result = $this->getDoctrine()->getRepository('WCSTvShowManagerBundle:TvShow')->QBfindAllSerieWithNbEpisodeBySeason();
+                break;
+            case 'findAllSerieWithNoteBySeason':
+                $result = $this->getDoctrine()->getRepository('WCSTvShowManagerBundle:TvShow')->QBfindAllSerieWithNoteBySeason();
+                break;
+            default:
+                $result = null;
+
+        }
+
+        return $this->render('WCSTvShowManagerBundle:TvShow:listqb.html.twig', array(
+            'form' => $form->createView(),
+            'result' => $result
+        ));
     }
 }

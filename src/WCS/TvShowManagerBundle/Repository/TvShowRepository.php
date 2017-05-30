@@ -27,8 +27,7 @@ class TvShowRepository extends \Doctrine\ORM\EntityRepository
         $query = $this->_em->createQuery(
             'SELECT t, avg(e.note) as note 
                   FROM WCSTvShowManagerBundle:TvShow t
-                  JOIN WCSTvShowManagerBundle:Episode e
-                  WHERE t.id = e.tvshow
+                  JOIN t.episodes e
                   GROUP BY t.id
                   ORDER BY note ASC')
             ->setMaxResults(3);
@@ -37,18 +36,41 @@ class TvShowRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
+    public function QBfindThreeWorstSerie()
+    {
+        $query = $this->createQueryBuilder('t')
+            ->addSelect('avg(e.note) note')
+            ->join('t.episodes', 'e')
+            ->groupBy('t.id')
+            ->orderBy('note', 'asc')
+            ->setMaxResults(3);
+
+        return $query->getQuery()->getResult();
+    }
+
     public function DQLfindSerieByMoreEpisode()
     {
         $query = $this->_em->createQuery(
             'SELECT t, count(e.id) as nb_episode
                   FROM WCSTvShowManagerBundle:TvShow t
-                  JOIN WCSTvShowManagerBundle:Episode e
-                  WHERE t.id = e.tvshow
+                  JOIN t.episodes e
                   GROUP BY t.id
                   ORDER BY nb_episode DESC ')
             ->setMaxResults(1);
 
         return $query->getResult();
+    }
+
+    public function QBfindSerieByMoreEpisode()
+    {
+        $query = $this->createQueryBuilder('t')
+            ->addSelect('count(e.id) nb_episode')
+            ->join('t.episodes', 'e')
+            ->groupBy('t.id')
+            ->orderBy('nb_episode', 'desc')
+            ->setMaxResults(1);
+
+        return $query->getQuery()->getResult();
     }
 
     public function DQLfindSerieByYearBefore2000()
@@ -59,16 +81,36 @@ class TvShowRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
+    public function QBfindSerieByYearBefore2000()
+    {
+        $query = $this->createQueryBuilder('t')
+            ->where('t.year < 2000');
+
+        return $query->getQuery()->getResult();
+    }
+
     public function DQLfindAllSerieWithNbEpisodeBySeason()
     {
         $query = $this->_em->createQuery(
             'SELECT t.name, e.season,count(e.id) as nb_episode
                   FROM WCSTvShowManagerBundle:TvShow t
-                  JOIN WCSTvShowManagerBundle:Episode e
-                  WHERE t.id = e.tvshow
+                  JOIN t.episodes e
                   GROUP BY t.id, e.season');
 
         return $query->getResult();
+    }
+
+    public function QBfindAllSerieWithNbEpisodeBySeason()
+    {
+        $query = $this->createQueryBuilder('t')
+            ->select('t.name')
+            ->addSelect('e.season')
+            ->addSelect('count(e.id) nb_episode')
+            ->join('t.episodes', 'e')
+            ->groupBy('t.id')
+            ->addGroupBy('e.season');
+
+        return $query->getQuery()->getResult();
     }
 
     public function DQLfindAllSerieWithNoteBySeason()
@@ -76,10 +118,22 @@ class TvShowRepository extends \Doctrine\ORM\EntityRepository
         $query = $this->_em->createQuery(
             'SELECT t.name, e.season,avg(e.note) as note_saison
                   FROM WCSTvShowManagerBundle:TvShow t
-                  JOIN WCSTvShowManagerBundle:Episode e
-                  WHERE t.id = e.tvshow
+                  JOIN t.episodes e
                   GROUP BY t.id, e.season');
 
         return $query->getResult();
+    }
+
+    public function QBfindAllSerieWithNoteBySeason()
+    {
+        $query = $this->createQueryBuilder('t')
+            ->select('t.name')
+            ->addSelect('e.season')
+            ->addSelect('avg(e.note) note_saison')
+            ->join('t.episodes', 'e')
+            ->groupBy('t.id')
+            ->addGroupBy('e.season');
+
+        return $query->getQuery()->getResult();
     }
 }

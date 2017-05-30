@@ -27,7 +27,7 @@ tvshow_dql:
     defaults: {_controller: WCSTvShowManagerBundle:TvShow:dql}
 
 tvshow_querybuilder:
-    path:    /tvshow/dql
+    path:    /tvshow/qb
     defaults: {_controller: WCSTvShowManagerBundle:TvShow:queryBuilder}
 
 episode_list:
